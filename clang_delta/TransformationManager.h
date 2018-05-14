@@ -101,6 +101,12 @@ public:
 
   void printTransformationNames();
 
+  // Transform change start
+  Transformation *getTransformation() {
+    return CurrentTransformationImpl;
+  }
+  // Transform change end
+
 private:
   
   TransformationManager();
@@ -152,12 +158,9 @@ template<typename TransformationClass>
 class RegisterTransformation {
 
 public:
-  RegisterTransformation(const char *TransName, const char *Desc) {
-    Transformation *TransImpl = new TransformationClass(TransName, Desc);
-    assert(TransImpl && "Fail to create TransformationClass");
- 
-    TransformationManager::registerTransformation(TransName, TransImpl);
-  }
+  // Since Windows does not support map operation for static allocation,
+  // just drop it.
+  RegisterTransformation(const char *TransName, const char *Desc) {}
 
 private:
   // Unimplemented

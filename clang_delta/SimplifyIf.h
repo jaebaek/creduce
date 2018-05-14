@@ -40,13 +40,11 @@ public:
 
   ~SimplifyIf(void);
 
+  void Initialize(clang::ASTContext &context) override;
+  bool HandleTopLevelDecl(clang::DeclGroupRef D) override;
+  void HandleTranslationUnit(clang::ASTContext &Ctx) override;
+
 private:
-  
-  virtual void Initialize(clang::ASTContext &context);
-
-  virtual bool HandleTopLevelDecl(clang::DeclGroupRef D);
-
-  virtual void HandleTranslationUnit(clang::ASTContext &Ctx);
 
   void simplifyIfStmt(void);
 

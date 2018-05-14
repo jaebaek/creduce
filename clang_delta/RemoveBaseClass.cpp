@@ -206,8 +206,8 @@ void RemoveBaseClass::copyBaseClassDecls(void)
 {
   if (!getNumExplicitDecls(TheBaseClass))
     return;
-  SourceLocation StartLoc = TheBaseClass->getBraceRange().getBegin();
-  SourceLocation EndLoc = TheBaseClass->getBraceRange().getEnd();
+  SourceLocation StartLoc = TheBaseClass->getSourceRange().getBegin();
+  SourceLocation EndLoc = TheBaseClass->getSourceRange().getEnd();
   TransAssert(EndLoc.isValid() && "Invalid RBraceLoc!");
   EndLoc = EndLoc.getLocWithOffset(-1);
 
@@ -215,7 +215,7 @@ void RemoveBaseClass::copyBaseClassDecls(void)
     TheRewriter.getRewrittenText(SourceRange(StartLoc, EndLoc));
 
   TransAssert(!DeclsStr.empty() && "Empty DeclsStr!");
-  SourceLocation InsertLoc = TheDerivedClass->getBraceRange().getEnd();
+  SourceLocation InsertLoc = TheDerivedClass->getSourceRange().getEnd();
   TheRewriter.InsertTextBefore(InsertLoc, DeclsStr);
 }
 

@@ -165,6 +165,8 @@ public:
     return false;
   }
 
+  void Initialize(clang::ASTContext &context) override;
+
 protected:
 
   typedef llvm::SmallVector<unsigned int, 10> IndexVector;
@@ -179,8 +181,6 @@ protected:
 
   unsigned int getArrayDimensionAndTypes(const clang::ArrayType *ArrayTy,
                                          ArraySubTypeVector &TyVec);
-
-  virtual void Initialize(clang::ASTContext &context);
 
   const clang::Type *
     getArrayBaseElemType(const clang::ArrayType *ArrayTy);
